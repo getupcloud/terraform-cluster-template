@@ -3,6 +3,12 @@ variable "name" {
   type        = string
 }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.21"
+}
+
 variable "kubeconfig_filename" {
   description = "Kubeconfig path"
   type        = string
