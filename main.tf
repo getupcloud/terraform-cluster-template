@@ -9,7 +9,7 @@ module "flux" {
   manifests_path = "./clusters/${var.name}/generic/manifests"
   wait           = var.flux_wait
   manifests_template_vars = merge({
-    cronitor_id : module.cronitor.cronitor_id
+    alertmanager_cronitor_id : module.cronitor.cronitor_id
   }, var.manifests_template_vars)
 }
 
