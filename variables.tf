@@ -1,6 +1,12 @@
-variable "name" {
+variable "cluster_name" {
   description = "Cluster name"
   type        = string
+}
+
+variable "cluster_sla" {
+  description = "Cluster SLA"
+  type        = string
+  default     = "none"
 }
 
 variable "kubernetes_version" {
@@ -54,6 +60,12 @@ variable "cronitor_pagerduty_key" {
   description = "Cronitor PagerDuty key"
   type        = string
   default     = ""
+}
+
+variable "api_endpoint" {
+  description = "Kubernetes API endpoint"
+  type        = string
+  default     = "https://localhost:6443"
 }
 
 variable "manifests_template_vars" {
