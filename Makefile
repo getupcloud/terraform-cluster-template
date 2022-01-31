@@ -21,3 +21,4 @@ release:
 	git pull --tags
 	git tag v$(VERSION)
 	git push --tags
+	git push
