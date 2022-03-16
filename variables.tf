@@ -9,6 +9,13 @@ variable "cluster_sla" {
   default     = "none"
 }
 
+##TODO: UPDATE
+## This may be already required by cloud provider
+variable "region" {
+  description = "Cluster Region"
+  type        = string
+}
+
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
@@ -80,4 +87,10 @@ variable "manifests_template_vars" {
   default = {
     alertmanager_pagerduty_key : ""
   }
+}
+
+variable "teleport_auth_token" {
+  description = "Teleport Agent auth token"
+  type        = string
+  default     = ""
 }
