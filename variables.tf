@@ -1,5 +1,12 @@
+## Common variables
+
 variable "cluster_name" {
   description = "Cluster name"
+  type        = string
+}
+
+variable "customer_name" {
+  description = "Customer name"
   type        = string
 }
 
@@ -9,23 +16,16 @@ variable "cluster_sla" {
   default     = "none"
 }
 
-##TODO: UPDATE
-## This may be already required by cloud provider
-variable "region" {
-  description = "Cluster Region"
-  type        = string
-}
-
-variable "kubernetes_version" {
-  description = "Kubernetes version"
-  type        = string
-  default     = "1.21"
+variable "use_kubeconfig" {
+  description = "Should kubernetes/kubectl providers use local kubeconfig or credentials from cloud module"
+  type        = bool
+  default     = false
 }
 
 variable "kubeconfig_filename" {
   description = "Kubeconfig path"
-  type        = string
   default     = "~/.kube/config"
+  type        = string
 }
 
 variable "get_kubeconfig_command" {
@@ -56,11 +56,6 @@ variable "manifests_path" {
   description = "Manifests dir inside GitRepository"
   type        = string
   default     = ""
-}
-
-variable "customer_name" {
-  description = "Customer name (Informative only)"
-  type        = string
 }
 
 variable "cronitor_api_key" {
