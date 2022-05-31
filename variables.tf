@@ -22,6 +22,13 @@ variable "use_kubeconfig" {
   default     = false
 }
 
+##TODO: UPDATE
+## This may be already required by cloud provider
+variable "region" {
+  description = "Cluster Region"
+  type        = string
+}
+
 variable "kubeconfig_filename" {
   description = "Kubeconfig path"
   default     = "~/.kube/config"
@@ -75,6 +82,19 @@ variable "api_endpoint" {
   type        = string
   default     = "https://localhost:6443"
 }
+
+variable "auth_token" {
+  description = "Kubernetes auth token"
+  type        = string
+  default     = null
+}
+
+variable "certificate_authority_data" {
+  description = "Kubernetes CA data as base64"
+  type        = string
+  default     = null
+}
+
 
 variable "manifests_template_vars" {
   description = "Template vars for use by cluster manifests"

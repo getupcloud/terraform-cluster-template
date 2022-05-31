@@ -1,5 +1,9 @@
 locals {
-  kubeconfig = abspath(pathexpand(var.kubeconfig_filename))
-  suffix     = random_string.suffix.result
-  secret     = random_string.secret.result
+  kubeconfig_filename        = abspath(pathexpand(var.kubeconfig_filename))
+  api_endpoint               = var.api_endpoint
+  token                      = var.auth_token
+  certificate_authority_data = base64decode(var.certificate_authority_data)
+
+  suffix = random_string.suffix.result
+  secret = random_string.secret.result
 }
