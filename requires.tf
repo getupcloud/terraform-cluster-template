@@ -6,12 +6,7 @@ terraform {
     }
 
     kubernetes = {
-      version = "~> 2.3.2"
-    }
-
-    opsgenie = {
-      source  = "opsgenie/opsgenie"
-      version = "~> 0.6"
+      version = "~> 2.8"
     }
 
     random = {

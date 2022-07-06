@@ -3,7 +3,7 @@ module "internet" {
 }
 
 module "flux" {
-  source = "github.com/getupcloud/terraform-module-flux?ref=v1.6"
+  source = "github.com/getupcloud/terraform-module-flux?ref=v1.10"
 
   git_repo       = var.flux_git_repo
   manifests_path = "./clusters/${var.cluster_name}/generic/manifests"
@@ -42,7 +42,7 @@ module "opsgenie" {
 }
 
 module "teleport-agent" {
-  source = "github.com/getupcloud/terraform-module-teleport-agent-config?ref=v0.2"
+  source = "github.com/getupcloud/terraform-module-teleport-agent-config?ref=v0.3"
 
   auth_token       = var.teleport_auth_token
   cluster_name     = var.cluster_name
