@@ -65,16 +65,28 @@ variable "manifests_path" {
   default     = ""
 }
 
-variable "cronitor_api_key" {
-  description = "Cronitor API key. Leave empty to destroy"
-  type        = string
-  default     = ""
+variable "cronitor_enabled" {
+  description = "Creates and enables Cronitor monitor."
+  type        = bool
+  default     = false
 }
 
 variable "cronitor_pagerduty_key" {
   description = "Cronitor PagerDuty key"
   type        = string
   default     = ""
+}
+
+variable "opsgenie_enabled" {
+  description = "Creates and enables Opsgenie integration."
+  type        = bool
+  default     = false
+}
+
+variable "opsgenie_team_name" {
+  description = "Opsgenie Owner team name of the integration."
+  type        = string
+  default     = "Operations"
 }
 
 variable "api_endpoint" {

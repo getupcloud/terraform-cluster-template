@@ -3,7 +3,7 @@ module "internet" {
 }
 
 module "flux" {
-  source = "github.com/getupcloud/terraform-module-flux?ref=v1.6"
+  source = "github.com/getupcloud/terraform-module-flux?ref=v1.9"
 
   git_repo       = var.flux_git_repo
   manifests_path = "./clusters/${var.cluster_name}/generic/manifests"
@@ -19,20 +19,27 @@ module "flux" {
 }
 
 module "cronitor" {
-  source = "github.com/getupcloud/terraform-module-cronitor?ref=v1.0"
+  source = "github.com/getupcloud/terraform-module-cronitor?ref=v1.3"
 
+  api_endpoint  = var.api_endpoint
   cluster_name  = var.cluster_name
   customer_name = var.customer_name
   cluster_sla   = var.cluster_sla
   suffix        = "generic" ##TODO: UPDATE
   tags          = []
-  api_key       = var.cronitor_api_key
   pagerduty_key = var.cronitor_pagerduty_key
-  api_endpoint  = var.api_endpoint
+}
+
+module "opsgenie" {
+  source = "github.com/getupcloud/terraform-module-opsgenie?ref=main"
+
+  opsgenie_enabled = var.opsgenie_enabled
+  customer_name    = var.customer_name
+  owner_team_name  = var.opsgenie_team_name
 }
 
 module "teleport-agent" {
-  source = "github.com/getupcloud/terraform-module-teleport-agent-config?ref=v0.2"
+  source = "github.com/getupcloud/terraform-module-teleport-agent-config?ref=v0.3"
 
   auth_token       = var.teleport_auth_token
   cluster_name     = var.cluster_name
