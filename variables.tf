@@ -70,7 +70,6 @@ variable "cronitor_enabled" {
   type        = bool
   default     = false
 }
-
 variable "cronitor_pagerduty_key" {
   description = "Cronitor PagerDuty key"
   type        = string
