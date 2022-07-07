@@ -120,3 +120,15 @@ variable "teleport_auth_token" {
   type        = string
   default     = ""
 }
+
+variable "pre_create" {
+  description = "Scripts to execute before cluster is created."
+  type        = list(string)
+  default     = []
+}
+
+variable "post_create" {
+  description = "Scripts to execute after cluster is created."
+  type        = list(string)
+  default     = []
+}

@@ -18,6 +18,10 @@ module "flux" {
     module.teleport-agent.teleport_agent_config,
     var.manifests_template_vars
   )
+
+  depends_on = [
+    shell_script.pre_create
+  ]
 }
 
 module "cronitor" {
