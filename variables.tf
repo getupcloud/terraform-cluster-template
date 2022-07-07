@@ -127,6 +127,20 @@ variable "pre_create" {
   default     = []
 }
 
+##TODO: UPDATE
+variable "PROVIDER_modules" {
+  description = "Configure modules to install"
+  type        = any
+  default     = {}
+}
+
+##TODO: UPDATE
+variable "PROVIDER_modules_defaults" {
+  description = "Configure modules to install (defaults)"
+  type        = any
+  default     = {}
+}
+
 variable "post_create" {
   description = "Scripts to execute after cluster is created."
   type        = list(string)

@@ -6,4 +6,8 @@ locals {
 
   suffix = random_string.suffix.result
   secret = random_string.secret.result
+
+  ##TODO: UPDATE
+  PROVIDER_modules        = merge(var.PROVIDER_modules_defaults, var.PROVIDER_modules)
+  PROVIDER_modules_output = {}
 }
