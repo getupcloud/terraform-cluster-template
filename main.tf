@@ -3,7 +3,7 @@ module "internet" {
 }
 
 module "flux" {
-  source = "github.com/getupcloud/terraform-module-flux?ref=v1.9"
+  source = "github.com/getupcloud/terraform-module-flux?ref=v1.10"
 
   git_repo       = var.flux_git_repo
   manifests_path = "./clusters/${var.cluster_name}/generic/manifests"
@@ -23,14 +23,14 @@ module "flux" {
 module "cronitor" {
   source = "github.com/getupcloud/terraform-module-cronitor?ref=v1.3"
 
-  api_endpoint  = var.api_endpoint
+  api_endpoint     = var.api_endpoint
   cronitor_enabled = var.cronitor_enabled
-  cluster_name  = var.cluster_name
-  customer_name = var.customer_name
-  cluster_sla   = var.cluster_sla
-  suffix        = "generic" ##TODO: UPDATE
-  tags          = []
-  pagerduty_key = var.cronitor_pagerduty_key
+  cluster_name     = var.cluster_name
+  customer_name    = var.customer_name
+  cluster_sla      = var.cluster_sla
+  suffix           = "generic" ##TODO: UPDATE
+  tags             = []
+  pagerduty_key    = var.cronitor_pagerduty_key
 }
 
 module "opsgenie" {
