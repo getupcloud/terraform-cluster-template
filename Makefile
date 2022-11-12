@@ -15,7 +15,11 @@ i init:
 	terraform init
 
 l lint:
-	@type tflint &>/dev/null || echo "Ignoring not found: tflint" && tflint
+	@if type tflint &>/dev/null; then \
+		find -type f -name \*.tf |grep -v '^\./\.' |xargs -L1 dirname|sort -u| xargs -L1 tflint; \
+	else\
+		echo "Ignoring not found: tflint"; \
+	fi
 	@if ! [[ "$(VERSION)" =~ $(SEMVER_REGEX) ]]; then \
 		echo Invalid semantic version: $(VERSION) >&2; \
 		exit 1; \
