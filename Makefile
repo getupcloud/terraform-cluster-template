@@ -50,6 +50,15 @@ update-version:
 	[ -n "$$BUILD_VERSION" ] || read -e -i "$(FILE_VERSION)" -p "New version: " BUILD_VERSION
 	echo $$BUILD_VERSION > $(VERSION_TXT)
 
+release-patch: import modules fmt update-version-patch
+	$(MAKE) build-release
+
+update-version-patch:
+	@awk -F. -v OFS=. '{$$NF++;print}' $(VERSION_TXT) > $(VERSION_TXT).tmp
+	mv -f  $(VERSION_TXT).tmp $(VERSION_TXT)
+	echo "Auto-incremented version $(FILE_VERSION) -> $$(<$(VERSION_TXT))"
+
+
 build-release:
 	git pull --tags
 	git commit -m "Built release $(RELEASE)" $(VERSION_TXT)
