@@ -11,6 +11,29 @@ import:
 	$(foreach i,$(filter https://% http://%, $(IMPORT_SOURCES)),curl -sLO $(i);)
 	$(foreach i,$(filter-out https://% http://%, $(IMPORT_SOURCES)),cp -f $(i) ./;)
 
+update-module-versions:
+	@modules=$$(hcl2json < main.tf  | jq '.module|keys|.[]' -r 2>/dev/null) || true
+	if [ -n "$$modules" ]; then
+		set -x
+		for module in $$modules; do
+			source=$$(hcl2json < main.tf | jq ".module[\"$$module\"][0].source" -r)
+			url=$$(./urlparse "$$source" "https://{netloc}{path}/raw/refs/heads/main/version.txt")
+			ref=$$(./urlparse "$$source" "{query[ref]}")
+			echo -n "$$url"
+			if ! new_ver=$$(curl --fail -sL "$$url"); then
+				printf "\r[ Not Found ] $$url\n"
+				continue
+			fi
+			[ "$${ref:0:1}" == v ] && cur_ver="$${ref:1}" || cur_ver="$$ver"
+			if [ "$$cur_ver" != "$$new_ver" ]; then
+				printf "\r[  $(COLOR_GREEN)Changed$(COLOR_RESET)  ] $$url: $$cur_ver -> $$new_ver\n"
+				sed -i -e "/.*source\s\?=.*$$module.*/s|?ref=v\?[a-zA-Z0-9\.\-]\+|?ref=v$$new_ver|" main.tf
+			else
+				printf "\r[ Unchanged ] $$url: $$cur_ver\n"
+			fi
+		done
+	fi
+
 modules: variables-modules-merge.tf.json
 variables-modules-merge.tf.json: variables-modules.tf
 	./make-modules $< > $@
