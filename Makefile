@@ -14,7 +14,6 @@ import:
 update-module-versions:
 	@modules=$$(hcl2json < main.tf  | jq '.module|keys|.[]' -r 2>/dev/null) || true
 	if [ -n "$$modules" ]; then
-		set -x
 		for module in $$modules; do
 			source=$$(hcl2json < main.tf | jq ".module[\"$$module\"][0].source" -r)
 			url=$$(./urlparse "$$source" "https://{netloc}{path}/raw/refs/heads/main/version.txt")
